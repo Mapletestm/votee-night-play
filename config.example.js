@@ -1,0 +1,4 @@
+window.VOTEE_CONFIG = {
+  SUPABASE_URL: "https://YOUR-PROJECT-REF.supabase.co",
+  SUPABASE_PUBLISHABLE_KEY: "sb_publishable_REPLACE_ME"
+};

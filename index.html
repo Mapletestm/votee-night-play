@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101b36">
+  <meta name="description" content="See the 8 PM–11 PM forecast at Votee Park, select multiple available nights, and view public vote totals. Friday evening is excluded.">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' https://api.open-meteo.com https://*.supabase.co wss://*.supabase.co; base-uri 'self'; form-action 'self'; frame-ancestors 'none';">
+  <title>Votee Night Play | Votee Park</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+  <div class="ambient ambient-one"></div>
+  <div class="ambient ambient-two"></div>
+
+  <header class="site-header">
+    <a class="brand" href="./" aria-label="Votee Night Play home">
+      <span class="brand-mark" aria-hidden="true">V</span>
+      <span>
+        <strong>Votee Night Play</strong>
+        <small>Teaneck, New Jersey</small>
+      </span>
+    </a>
+    <span class="time-pill">8:00 PM–11:59 PM</span>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="eyebrow">Weather + community voting</div>
+      <h1>Pick every night<br>you can play.</h1>
+      <p>Compare the evening forecast, select one or more nights that work for you, and see the public vote total for each night. Friday evening is automatically excluded.</p>
+      <div class="location-line">
+        <span aria-hidden="true">📍</span>
+        <span>Milton A. Votee Park · 250 Colonial Court, Teaneck, NJ</span>
+      </div>
+    </section>
+
+    <section class="status-bar" aria-live="polite">
+      <div>
+        <span class="status-dot"></span>
+        <span id="updatedText">Loading evening forecast…</span>
+      </div>
+      <button class="text-button" id="refreshButton" type="button">Refresh</button>
+    </section>
+
+    <section class="forecast-section" aria-labelledby="forecastHeading">
+      <div class="section-heading">
+        <div>
+          <span class="section-kicker">Next seven calendar days</span>
+          <h2 id="forecastHeading">Available nights</h2>
+        </div>
+        <div class="legend"><span>🌧️ Rain chance</span><span>💨 Wind</span></div>
+      </div>
+
+      <div id="loadingState" class="loading-grid" aria-label="Loading forecast">
+        <div class="skeleton-card"></div>
+        <div class="skeleton-card"></div>
+        <div class="skeleton-card"></div>
+      </div>
+      <div id="errorState" class="message-card hidden" role="alert"></div>
+      <div id="forecastGrid" class="forecast-grid hidden"></div>
+    </section>
+
+    <section class="vote-panel" aria-labelledby="voteHeading">
+      <div class="vote-copy">
+        <span class="section-kicker">Community availability poll</span>
+        <h2 id="voteHeading">Enter your availability</h2>
+        <p>Your first and last name, selected nights, and submission time are stored privately for the organizer. Visitors to this website can see only weather and numerical vote totals—never anyone’s name.</p>
+      </div>
+
+      <form id="voteForm" class="vote-form">
+        <div class="name-grid">
+          <label>
+            <span>First name</span>
+            <input id="firstName" name="first_name" type="text" autocomplete="given-name" maxlength="50" required>
+          </label>
+          <label>
+            <span>Last name</span>
+            <input id="lastName" name="last_name" type="text" autocomplete="family-name" maxlength="50" required>
+          </label>
+        </div>
+
+        <fieldset class="night-fieldset">
+          <legend>Select every night you can play</legend>
+          <div id="nightOptions" class="night-options"></div>
+        </fieldset>
+
+        <button class="primary-button" type="submit" id="voteButton">Save my availability</button>
+        <div id="formMessage" class="form-message" role="status"></div>
+      </form>
+    </section>
+
+    <section class="privacy-note" aria-label="Privacy and voting information">
+      <div><strong>Visible to everyone</strong><span>Weather and totals for each night</span></div>
+      <div><strong>Private organizer data</strong><span>First name, last name, choices, and submission time</span></div>
+      <div><strong>Voting rule</strong><span>Select multiple nights and update them later from the same browser</span></div>
+    </section>
+
+    <section class="notes">
+      <strong>Forecast note</strong>
+      <p>Weather can change quickly. Check again before heading to the park, especially when rain or thunderstorms are possible.</p>
+    </section>
+  </main>
+
+  <footer>
+    <span>Community scheduling for Votee Park</span>
+    <span>Weather data by Open-Meteo</span>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="config.js"></script>
+  <script src="assets/app.js" defer></script>
+</body>
+</html>
